@@ -1,8 +1,9 @@
 import React from 'react';
+import LoginContainer from './session/login_container';
 
-const App = () =>(
+const App = () => (
   <div>
-    <div className="g-signin2" data-onsuccess="onSignIn"></div>
+    <LoginContainer />
     <h1>fuck</h1>
   </div>
 );
