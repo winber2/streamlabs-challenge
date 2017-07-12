@@ -1,13 +1,13 @@
 export const login = () => (
   $.ajax({
     method: 'POST',
-    url: 'api/sessions'
+    url: 'api/session'
   })
 )
 
 export const logout = () => (
   $.ajax({
     method: 'DELETE',
-    url: 'api/sessions'
+    url: 'api/session'
   })
 )

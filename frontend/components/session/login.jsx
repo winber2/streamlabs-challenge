@@ -4,6 +4,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.onSignIn = this.onSignIn.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -23,13 +24,24 @@ class Login extends React.Component {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    this.props.login();
+    let user = {
+      name: profile.getName()
+    }
+    this.props.login(user);
+  }
+
+  logout() {
+    gapi.auth2.getAuthInstance().signOut();
+    this.props.logout();
   }
 
   render() {
+    let currentUser = this.props.currentUser || { name: '' }
     return(
       <div>
+        <span>{currentUser.name}</span>
         <div id="g-signin2" data-onsuccess={this.onSignIn}></div>
+        <div onClick={this.logout}>LOGOUT</div>
       </div>
     )
   }
