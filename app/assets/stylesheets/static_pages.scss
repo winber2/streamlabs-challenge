@@ -1,3 +1,18 @@
 // Place all the styles related to the staticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+    font-family: Nova;
+    src: url('./fonts/proxima-nova-light.otf');
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p, span, div, section, main, aside, article,
+ul, li, ol, span, figure {
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  list-style: none;
+
+  font-family: Nove;
+}

@@ -1,0 +1,17 @@
+div.stream-index {
+  margin: 0 auto;
+  width: 1200px;
+
+  ul.stream-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    li {
+      background: blue;
+      margin: 20px;
+      width: 270px;
+      height: 270px;
+    }
+  }
+}
