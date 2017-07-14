@@ -6,7 +6,6 @@ class StreamIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = { streamList: [] }
-    this.requestStream = this.requestStream.bind(this);
   }
 
   componentDidMount() {
@@ -19,87 +18,28 @@ class StreamIndex extends React.Component {
       		type: 'video',
       		key: 'AIzaSyACExGb2UPEpF4FxI2OW7AH6MMxbKP-bNs',
       		q: 'league',
-          maxResults: 1
+          maxResults: 6
       }
     }).then((response) => {
       let videos = []
-      response.items.forEach( video => {
+      response.items.forEach( (video, idx)=> {
         videos.push(
-          <Thumbnail title={video.snippet.title}
-          creator={video.snippet.channelTitle}
-          videoId={video.id.videoId}
-          thumbnail={video.snippet.thumbnails.high.url}/>
+          <Thumbnail key={idx}
+            title={video.snippet.title}
+            creator={video.snippet.channelTitle}
+            videoId={video.id.videoId}
+            thumbnail={video.snippet.thumbnails.high.url}/>
         )
       });
       this.setState({ streamList: videos });
     })
   }
 
-  compoafwdMount() {
-    var GoogleAuth; // Google Auth object.
-    // Load the API's client and auth2 modules.
-    // Call the initClient function after the modules load.
-    gapi.load('client:auth2', initClient);
-    let scope = this;
-
-    function initClient() {
-      window.asdf = gapi.client.init({
-          'apiKey': ENV['GOOGLE_API'],
-          'clientId': ENV['CLIENT_ID'],
-          'scope': 'https://www.googleapis.com/auth/youtube.readonly',
-          'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
-      }).then(() => {
-        gapi.client.youtube.channels.list({
-          'part': 'snippet,contentDetails,statistics',
-          'forUsername': 'GoogleDevelopers'
-          // 'method': 'GET',
-          // 'path': '/youtube/v3/channels',
-          // 'params': {'part': 'snippet', 'mine': 'true'}
-        }).then(() => {
-          request.execute(function(response) {
-            console.log(response);
-          })
-        })
-      });
-      // .then(function () {
-      //     GoogleAuth = gapi.auth2.getAuthInstance();
-      //
-      //     // Listen for sign-in state changes.
-      //     GoogleAuth.isSignedIn.listen(updateSigninStatus);
-      // }).then(scope.requestStream);
-    }
-  }
-
-  requestStream() {
-    // Example 2: Use gapi.client.request(args) function
-    console.log('asdf');
-    var request = gapi.client.request({
-      'method': 'GET',
-      'path': '/youtube/v3/channels',
-      'params': {'part': 'snippet', 'mine': 'true'}
-    }).then(() => {
-      request.execute(function(response) {
-        console.log(response);
-      })
-    });
-  }
-
   render() {
     return(
       <div className='stream-index'>
         <ul className='stream-list'>
-          <li>
-            {this.state.streamList}
-          </li>
-          <li>
-            <div className='box'></div>
-          </li>
-          <li>
-            <div className='box'></div>
-          </li>
-          <li>
-            <div className='box'></div>
-          </li>
+          {this.state.streamList}
         </ul>
       </div>
     )

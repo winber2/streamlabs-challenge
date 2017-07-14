@@ -7,9 +7,13 @@ class Thumbnail extends React.Component {
 
   render() {
     return(
-      <article>
-        <img src={this.props.thumbnail} />
-      </article>
+      <li className='thumbnail'>
+        <div className='img-wrapper'>
+          <img src={this.props.thumbnail} />
+        </div>
+        <span className='title'>{this.props.title}</span>
+        <span className='channel'>{this.props.creator}</span>
+      </li>
     )
   }
 }

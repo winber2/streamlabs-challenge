@@ -7,12 +7,26 @@ div.stream-index {
     flex-wrap: wrap;
     width: 100%;
 
-    li {
+    li.thumbnail {
+      display: flex;
+      flex-direction: column;
+
       background: transparent;
-      border: 1px solid black;
       margin: 20px;
-      width: 270px;
-      height: 270px;
+      width: 320px;
+
+      div.img-wrapper {
+        width: 320px;
+        height: 270px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: calc(100% + 90px);
+        }
+      }
     }
   }
 }
