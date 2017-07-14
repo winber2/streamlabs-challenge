@@ -44,8 +44,8 @@ class StreamIndex extends React.Component {
 
     function initClient() {
       window.asdf = gapi.client.init({
-          'apiKey': 'AIzaSyACExGb2UPEpF4FxI2OW7AH6MMxbKP-bNs',
-          'clientId': '481538411291-cfgrieebjsehleej57mb1rg2hn2vh2dk.apps.googleusercontent.com',
+          'apiKey': ENV['GOOGLE_API'],
+          'clientId': ENV['CLIENT_ID'],
           'scope': 'https://www.googleapis.com/auth/youtube.readonly',
           'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
       }).then(() => {
