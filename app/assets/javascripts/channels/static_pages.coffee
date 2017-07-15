@@ -10,4 +10,4 @@ App.static_pages = App.cable.subscriptions.create "StaticPagesChannel",
     $('#messages').append "<span>#{data}</span>"
 
   speak: (message) ->
-    @perform 'speak', message: message
+    @perform 'speak', message 

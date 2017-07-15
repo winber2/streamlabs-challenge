@@ -1,5 +1,4 @@
 import React from 'react';
-import Video from './video';
 import Thumbnail from './thumbnail';
 
 class StreamIndex extends React.Component {
@@ -28,7 +27,8 @@ class StreamIndex extends React.Component {
             title={video.snippet.title}
             creator={video.snippet.channelTitle}
             videoId={video.id.videoId}
-            thumbnail={video.snippet.thumbnails.high.url}/>
+            thumbnail={video.snippet.thumbnails.high.url}
+            history={this.props.history} />
         )
       });
       this.setState({ streamList: videos });

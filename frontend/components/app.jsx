@@ -1,12 +1,14 @@
 import React from 'react';
-import LoginContainer from './session/login_container';
-import StreamIndex from './stream/stream_index';
+import { Switch, Route } from 'react-router-dom';
+import Home from './home';
+import ShowVideo from './stream/show_video';
 
 const App = () => (
   <div>
-    <LoginContainer />
-    <StreamIndex />
-    <div id='messages'></div>
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route path='/:videoId' component={ShowVideo} />
+    </Switch>
   </div>
 );
 
