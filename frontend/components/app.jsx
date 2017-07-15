@@ -6,7 +6,7 @@ const App = () => (
   <div>
     <LoginContainer />
     <StreamIndex />
-    <h1>fuck</h1>
+    <div id='messages'></div>
   </div>
 );
 
