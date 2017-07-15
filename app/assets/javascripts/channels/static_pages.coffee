@@ -7,7 +7,7 @@ App.static_pages = App.cable.subscriptions.create "StaticPagesChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    $("##{data.chatroomId}").append "<span>#{data.message}</span>"
+    $("##{data.chatroomId}").append "<div class='message'><span class='user'>#{data.user}:</span><span class='message'>#{data.message}</span></div>"
 
   speak: (message) ->
     @perform 'speak', message

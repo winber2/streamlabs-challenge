@@ -10,22 +10,20 @@ class Login extends React.Component {
   componentDidMount() {
     gapi.signin2.render('g-signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 200,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'dark',
+      'width': 150,
+      'height': 30,
+      'longtitle': false,
+      'theme': 'light',
       'onsuccess': this.onSignIn
     });
   }
 
   onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     let user = {
-      name: profile.getName()
+      name: profile.getGivenName(),
+      image: profile.getImageUrl(),
+      uid: profile.getId()
     }
     this.props.login(user);
   }
@@ -36,14 +34,23 @@ class Login extends React.Component {
   }
 
   render() {
-    let currentUser = this.props.currentUser || { name: '' }
-    return(
-      <div>
-        <span>{currentUser.name}</span>
-        <div id="g-signin2" data-onsuccess={this.onSignIn}></div>
-        <div onClick={this.logout}>LOGOUT</div>
-      </div>
-    )
+    let currentUser = this.props.currentUser, login;
+    if (currentUser) {
+      login = (
+        <div className='login'>
+          <span>Hey, {currentUser.name}!</span>
+          <div className='logout' onClick={this.logout}></div>
+        </div>
+      )
+    } else {
+      currentUser = { name: '' };
+      login = (
+        <div className='login'>
+          <div id="g-signin2" data-onsuccess={this.onSignIn}></div>
+        </div>
+      )
+    }
+    return(login);
   }
 }
 

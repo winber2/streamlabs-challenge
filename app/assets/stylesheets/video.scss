@@ -1,0 +1,52 @@
+main.video-wrapper {
+  width: 1500px;
+  background: #182227;
+  margin: auto;
+  padding: 50px;
+
+  display: flex;
+
+  article.video {
+    width: 805px;
+    height: 450px;
+  }
+
+  aside.chatroom-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    height: 455px;
+
+    ul.chatroom {
+      height: 100%;
+      border-radius: 3px;
+      padding: 10px;
+      background: AliceBlue;
+
+      span {
+        color: black;
+      }
+    }
+
+    div.chatroom-input-wrapper {
+      position: relative;
+      bottom: 5px;
+      padding: 10px;
+      display: flex;
+      background: AliceBlue;
+    }
+
+    input {
+      padding: 3px;
+      border: none;
+      border-bottom: 1px solid gray;
+      background: inherit;
+      flex: 1;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  }
+}

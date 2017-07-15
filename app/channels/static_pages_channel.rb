@@ -9,6 +9,8 @@ class StaticPagesChannel < ApplicationCable::Channel
 
   def speak(data)
     # ActionCable.server.broadcast 'static_pages_channel', data['message']
-    Message.create(content: data['message'], chatroomId: data['chatroomId'])
+    Message.create(
+      content: data['message'], chatroomId: data['chatroomId'], uid: data['uid'], user: data['user']
+    )
   end
 end

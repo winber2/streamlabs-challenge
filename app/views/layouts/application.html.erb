@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <script src="https://apis.google.com/js/platform.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:100,300,400" rel="stylesheet">
     <meta name="google-signin-client_id" content="481538411291-cfgrieebjsehleej57mb1rg2hn2vh2dk.apps.googleusercontent.com">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -18,14 +19,6 @@
   </head>
 
   <body>
-    <div>
-      <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-      <% end %>
-    </div>
     <div>
       <%= yield %>
     </div>

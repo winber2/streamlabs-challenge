@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715055605) do
+ActiveRecord::Schema.define(version: 20170715194306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 20170715055605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "chatroomId"
+    t.string   "uid"
+    t.string   "user"
+    t.index ["chatroomId", "uid"], name: "index_messages_on_chatroomId_and_uid", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
