@@ -3,7 +3,7 @@ class BroadcastMessageJob < ApplicationJob
 
   def perform(message)
     # Do something later
-    ActionCable.server.broadcast 'static_pages_channel', message.content
+    ActionCable.server.broadcast('static_pages_channel', { message: message.content, chatroomId: message.chatroomId })
   end
 
   private
