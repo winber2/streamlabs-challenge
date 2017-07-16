@@ -122,6 +122,7 @@ section.video-recommendations {
 h2 {
   display: flex;
   align-items: center;
+  margin-bottom: 20px
 }
 
 h2:hover {
@@ -147,13 +148,16 @@ div.stream-options-wrapper {
   margin: 0 50px;
 
   div.stream-options {
-    display: none;
+    display: flex;
     width: 100%;
-    padding: 20px;
+    height: 0px;
+    padding: 0 20px;
     box-sizing: border-box;
+    transition: all 0.5s;
+    overflow: hidden;
 
     &.active {
-      display: flex;
+      height: 220px;
     }
   }
 
