@@ -17,7 +17,9 @@ header.home {
       flex-grow: 1;
     }
 
-    li.search { flex-grow: 0.5 }
+    li.search {
+      width: 500px;
+    }
 
     li {
       padding: 10px;
@@ -35,7 +37,7 @@ header.home {
     input {
       border: none;
       border-radius: 3px;
-      background: DarkGray;
+      background: LightGray;
       padding: 6px;
       padding-left: 30px;
       width: 100%;
@@ -49,6 +51,29 @@ header.home {
     input:focus {
       outline: none;
     }
+  }
+}
+
+div.login {
+  span {
+    font-size: 14px;
+    color: #4e4e4e;
+    margin-top: 3px;
+  }
+
+  span.white {
+    color: white;
+    padding: 0 10px;
+    font-size: 16px
+  }
+}
+
+div.abcRioButton {
+  border-radius: 3px;
+
+  span.abcRioButtonContents {
+    position: relative;
+    top: 2px;
   }
 }
 

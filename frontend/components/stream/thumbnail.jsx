@@ -12,12 +12,11 @@ class Thumbnail extends React.Component {
 
   render() {
     return(
-      <li onClick={this.showStream} className='thumbnail'>
-        <div className='img-wrapper'>
+      <li className='thumbnail'>
+        <div onClick={this.showStream} className='img-wrapper'>
           <img src={this.props.thumbnail} />
         </div>
         <span className='title'>{this.props.title}</span>
-        <span className='channel'>{this.props.creator}</span>
       </li>
     )
   }

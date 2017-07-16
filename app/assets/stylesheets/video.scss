@@ -1,5 +1,10 @@
+div.video-show-page {
+  background: #182227;
+  min-height: 100vh;
+}
+
 main.video-wrapper {
-  width: 1500px;
+  width: 1300px;
   background: #182227;
   margin: auto;
   padding: 50px;
@@ -23,9 +28,26 @@ main.video-wrapper {
       border-radius: 3px;
       padding: 10px;
       background: AliceBlue;
+      overflow-y: scroll;
 
-      span {
+      div.message {
+        display: table;
+      }
+
+      span.message {
         color: black;
+        display: block;
+        max-width: 400px;
+        word-wrap: break-word;
+      }
+
+      span.user {
+        display: table-cell;
+        font-weight: bold;
+        font-family: Nobile;
+        padding-right: 10px;
+        color: purple;
+        font-size: 15px
       }
     }
 
@@ -49,4 +71,46 @@ main.video-wrapper {
       outline: none;
     }
   }
+}
+
+section.video-recommendations {
+  margin: 0 auto;
+
+  div.carousel-container {
+    margin: 0 auto;
+    padding: 40px;
+    width: 80%;
+    color: #333;
+    background: #182227;
+
+    ul.slick-dots {
+      position: relative;
+      top: 20px;
+
+      li button::before {
+        color: gray;
+        opacity: 0.8;
+      }
+
+      li.slick-active button::before {
+        color: white;
+        opacity: 0.8;
+      }
+    }
+
+    div.carousel-image-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 280px;
+      width: 100%;
+    }
+  }
+}
+
+div.next-arrow, div.prev-arrow {
+  background-image: asset-url('arrow.png');
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
 }

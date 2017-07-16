@@ -8,11 +8,14 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.currentUser) {
+      return;
+    }
     gapi.signin2.render('g-signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 150,
-      'height': 30,
-      'longtitle': false,
+      'width': 170,
+      'height': 32,
+      'longtitle': true,
       'theme': 'light',
       'onsuccess': this.onSignIn
     });
@@ -38,7 +41,7 @@ class Login extends React.Component {
     if (currentUser) {
       login = (
         <div className='login'>
-          <span>Hey, {currentUser.name}!</span>
+          <span className='white'>Hey, {currentUser.name}!</span>
           <div className='logout' onClick={this.logout}></div>
         </div>
       )

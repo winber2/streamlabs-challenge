@@ -7,6 +7,7 @@ const App = () => (
   <div>
     <Switch>
       <Route exact path='/' component={Home} />
+      <Route path='/search' component={Home} />
       <Route path='/:videoId' component={ShowVideoContainer} />
     </Switch>
   </div>

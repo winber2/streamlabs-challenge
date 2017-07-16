@@ -11,7 +11,6 @@ class Home extends React.Component {
   render() {
     return(
       <div className="main">
-        <Navigation history={this.props.history} />
         <StreamIndex history={this.props.history} />
       </div>
     )

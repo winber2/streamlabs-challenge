@@ -1,5 +1,10 @@
 div.main {
   background: #182227;
+  min-height: 100vh;
+}
+
+h1.search {
+  margin-left: 20px;
 }
 
 div.stream-index {
@@ -27,6 +32,7 @@ div.stream-index {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 10px;
 
         img {
           height: calc(100% + 90px);
@@ -38,12 +44,22 @@ div.stream-index {
 
 div.login {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   div.logout {
     background-image: asset-url('logout.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
+}
+
+div.img-wrapper:hover {
+  cursor: pointer;
 }
