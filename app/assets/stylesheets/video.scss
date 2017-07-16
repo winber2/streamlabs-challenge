@@ -22,6 +22,7 @@ main.video-wrapper {
     flex-direction: column;
     padding: 0 20px;
     height: 455px;
+    max-width: 450px;
 
     ul.chatroom {
       height: 100%;
@@ -29,26 +30,8 @@ main.video-wrapper {
       padding: 10px;
       background: AliceBlue;
       overflow-y: scroll;
+      max-width: inherit;
 
-      div.message {
-        display: table;
-      }
-
-      span.message {
-        color: black;
-        display: block;
-        max-width: 400px;
-        word-wrap: break-word;
-      }
-
-      span.user {
-        display: table-cell;
-        font-weight: bold;
-        font-family: Nobile;
-        padding-right: 10px;
-        color: purple;
-        font-size: 15px
-      }
     }
 
     div.chatroom-input-wrapper {
@@ -71,6 +54,28 @@ main.video-wrapper {
       outline: none;
     }
   }
+}
+
+
+div.message {
+  display: table;
+  max-width: inherit;
+}
+
+span.message {
+  color: black;
+  display: block;
+  max-width: inherit;
+  word-wrap: break-word;
+}
+
+span.user {
+  display: table-cell;
+  font-weight: bold;
+  font-family: Nobile;
+  padding-right: 10px;
+  color: purple;
+  font-size: 15px
 }
 
 section.video-recommendations {
@@ -132,7 +137,7 @@ div.stream-options-image {
   margin-left: 5px;
   transform: rotate(90deg);
   transition: all 0.3s;
-  
+
   &.active {
     transform: rotate(180deg)
   }
@@ -145,6 +150,7 @@ div.stream-options-wrapper {
     display: none;
     width: 100%;
     padding: 20px;
+    box-sizing: border-box;
 
     &.active {
       display: flex;
@@ -161,9 +167,12 @@ div.stream-options-wrapper {
     background: AliceBlue;
     height: 200px;
     width: 100%;
+    max-width: 1000px;
     margin: 0 50px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
   }
 
   input {
@@ -172,8 +181,8 @@ div.stream-options-wrapper {
     border-radius: 3px;
     background: inherit;
     padding: 6px;
+    margin-bottom: 10px;
     font-size: 14px;
-    margin: 10px
   }
 
   input:focus {
@@ -185,4 +194,5 @@ div.border {
   margin: 20px 80px;
   background: lightgray;
   height: 1px;
+  width: calc(100% - 190px);
 }

@@ -2,20 +2,64 @@ import React from 'react';
 import Slider from 'react-slick';
 import Video from './video';
 import Navigation from '../navigation/navigation';
+import { values } from 'lodash';
 
 class ShowVideo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      interval: null,
+      time: null,
+      messagesPerSecond: 0,
+      totalMessages: 0,
+      activeUsers: 0,
       input: '',
       active: '',
-      videos: [<div key={20}><img src='http://placekitten.com/g/400/200' /></div>] }
+      videos: [<div key={20}><img src='http://placekitten.com/g/400/200' /></div>],
+      userSearch: []
+     }
     this.chat = this.chat.bind(this);
     this.toggleOptions = this.toggleOptions.bind(this);
+    this.userSearch = this.userSearch.bind(this);
   }
 
   componentDidMount() {
     this.search('league');
+    this.state.time = new Date();
+    this.state.interval = setInterval( () => this.updateStats(), 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
+  }
+
+  updateStats() {
+    let startTime = this.state.time;
+    let time = (new Date() - startTime) / 1000;
+    this.props.fetchChatroomMessages({ chatroomId: this.props.match.params.videoId })
+      .then((messages) => {
+        let activeUsers = 0;
+        let users = {};
+        let chatroomMessages = 0;
+        let newMessages = values(messages.messages);
+        newMessages.forEach( message => {
+          if (new Date() - new Date(message.created_at) < 6000000) {
+            if (!users[`${message.user}`]) {
+              users[`${message.user}`] = message.user;
+              activeUsers += 1;
+            }
+          }
+          if (new Date() - new Date(message.created_at) < 4000) {
+            chatroomMessages += 1;
+          }
+        })
+        console.log(chatroomMessages);
+        this.setState({
+          totalMessages: newMessages.length,
+          messagesPerSecond: chatroomMessages / 4,
+          activeUsers: activeUsers
+        });
+      });
   }
 
   chat(e) {
@@ -63,6 +107,34 @@ class ShowVideo extends React.Component {
     })
   }
 
+  userSearch(e) {
+    if (e.keyCode === 13) {
+      let user = e.currentTarget.value;
+      let chatroomId = this.props.match.params.videoId;
+      let query = {
+        name: user,
+        chatroomId: chatroomId
+      };
+      let scope = this;
+      this.props.fetchUserMessages(query)
+        .then(() => this.renderMessages());
+    }
+  }
+
+  renderMessages() {
+    if (this.props.messages.messages) {
+      let messages = [];
+      values(this.props.messages.messages).forEach( (message, idx) => {
+        messages.push(
+          <div key={idx} className='message'>
+            <span className='user'>{message.user}:</span><span className='message'>{message.content}</span>
+          </div>
+        );
+      });
+      this.setState({ userSearch: messages })
+    }
+  }
+
   toggleOptions() {
     if (this.state.active) {
       this.setState({ active: '' });
@@ -100,16 +172,21 @@ class ShowVideo extends React.Component {
                 <tbody>
                   <tr>
                     <td>Messages / second:</td>
-                    <td>25</td>
+                    <td>{Math.round(this.state.messagesPerSecond)}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Messages:</td>
+                    <td>{this.state.totalMessages}</td>
                   </tr>
                   <tr>
                     <td>Users participating:</td>
-                    <td>25</td>
+                    <td>{this.state.activeUsers}</td>
                   </tr>
                 </tbody>
               </table>
               <ul className='user-search'>
-                <input className='user-search' placeholder='Search chat by User!'/>
+                <input onKeyDown={this.userSearch} className='user-search' placeholder='Search chat by User!'/>
+                {this.state.userSearch}
               </ul>
             </div>
           </div>

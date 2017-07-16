@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:create, :destroy]
+    resources :messages, only: [:index]
     # get 'auth/:provider/callback', to: 'api/sessions#create'
     # get 'auth/failure', to: "static_pages#root"
     # get 'signout', to: 'api/sessions#destroy', as: 'signout'
