@@ -68,8 +68,7 @@ class ShowVideo extends React.Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
-      prevArrow: <div className='prev-arrow'></div>,
-      nextArrow: <div className='next-arrow'></div>
+      swipeToSlide: false
     }
     return(
       <div className="video-show-page">
@@ -84,6 +83,26 @@ class ShowVideo extends React.Component {
           </aside>
         </main>
         <section className="video-recommendations">
+          <div className='stream-options-wrapper'>
+            <h2>Stream Options</h2>
+            <div className='stream-options'>
+              <div className='message-stats-wrapper'>
+                <div className='message-stats'>
+                  <span>Messages / second: </span>
+                  <span>25</span>
+                </div>
+                <div className='message-stats'>
+                  <span>Users participating: </span>
+                  <span>25</span>
+                </div>
+              </div>
+              <ul className='user-search'>
+                <input className='user-search' placeholder='Search chat by User!'/>
+              </ul>
+            </div>
+          </div>
+          <div className='border' />
+          <h1>Related Videos</h1>
           <div className='carousel-container'>
             <Slider {...settings}>
               {this.state.videos}
