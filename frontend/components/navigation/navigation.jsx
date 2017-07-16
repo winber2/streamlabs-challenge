@@ -15,7 +15,7 @@ class Navigation extends React.Component {
   search(e) {
     if (e.keyCode === 13) {
       this.props.history.push('/');
-      this.props.handleSubmit(e)
+      this.props.handleSubmit(e);
     }
   }
 

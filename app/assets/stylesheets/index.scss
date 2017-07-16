@@ -43,16 +43,23 @@ div.stream-index {
 }
 
 div.login {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  div.greeting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   div.logout {
     background-image: asset-url('logout.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 
     &:hover {
       cursor: pointer;
@@ -62,4 +69,20 @@ div.login {
 
 div.img-wrapper:hover {
   cursor: pointer;
+}
+
+#g-signin2 {
+  position: absolute;
+  right: 0;
+}
+
+div.google-signin {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
 }

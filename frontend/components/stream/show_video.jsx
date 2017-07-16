@@ -21,9 +21,11 @@ class ShowVideo extends React.Component {
     this.chat = this.chat.bind(this);
     this.toggleOptions = this.toggleOptions.bind(this);
     this.userSearch = this.userSearch.bind(this);
+    this.toVideo = this.toVideo.bind(this);
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.search('league');
     this.state.time = new Date();
     this.state.interval = setInterval( () => this.updateStats(), 2000);
@@ -53,7 +55,6 @@ class ShowVideo extends React.Component {
             chatroomMessages += 1;
           }
         })
-        console.log(chatroomMessages);
         this.setState({
           totalMessages: newMessages.length,
           messagesPerSecond: chatroomMessages / 4,
@@ -81,6 +82,13 @@ class ShowVideo extends React.Component {
     return e => this.setState({ input: e.currentTarget.value });
   }
 
+  toVideo(videoId) {
+    return () => {
+      window.scrollTo(0, 0);
+      this.props.history.push(`${videoId}`);
+    }
+  }
+
   search(query) {
     $.ajax({
       method: 'GET',
@@ -97,9 +105,10 @@ class ShowVideo extends React.Component {
       let videos = [];
       response.items.forEach( (video, idx) => {
         if (video.id.videoId === this.props.match.params.videoId) return;
+
         videos.push(
           <div key={idx} className='carousel-image-wrapper'>
-            <img src={video.snippet.thumbnails.high.url} />
+            <img onClick={this.toVideo(video.id.videoId)} src={video.snippet.thumbnails.high.url} />
           </div>
         );
       });
@@ -150,11 +159,12 @@ class ShowVideo extends React.Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
-      swipeToSlide: false
+      swipeToSlide: false,
+      draggable: false
     }
     return(
       <div className="video-show-page">
-        <Navigation history={this.props.history} />
+        <Navigation history={this.props.history} handleSubmit={() => 'i do nothing lol'} />
         <main className="video-wrapper">
           <Video videoId={this.props.match.params.videoId} />
           <aside className="chatroom-wrapper">

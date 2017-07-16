@@ -105,6 +105,10 @@ section.video-recommendations {
       }
     }
 
+    div.slick-slide:hover {
+      cursor: pointer;
+    }
+
     div.carousel-image-wrapper {
       display: flex;
       align-items: center;

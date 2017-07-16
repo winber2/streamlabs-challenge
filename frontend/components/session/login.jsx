@@ -3,6 +3,7 @@ import React from 'react';
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { active: '' };
     this.onSignIn = this.onSignIn.bind(this);
     this.logout = this.logout.bind(this);
   }
@@ -11,17 +12,25 @@ class Login extends React.Component {
     if (this.props.currentUser) {
       return;
     }
-    gapi.signin2.render('g-signin2', {
-      'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 170,
-      'height': 32,
-      'longtitle': true,
-      'theme': 'light',
-      'onsuccess': this.onSignIn
-    });
+    if (document.getElementById('g-signin2')) {
+      gapi.signin2.render('g-signin2', {
+        'scope': 'https://www.googleapis.com/auth/plus.login',
+        'width': 170,
+        'height': 35,
+        'longtitle': true,
+        'theme': 'light',
+        'onsuccess': this.onSignIn
+      });
+    }
+    setTimeout(() => this.activateSignin(), 600);
+  }
+
+  activateSignin() {
+    if (!this.props.currentUser) this.setState({ active: 'active' });
   }
 
   onSignIn(googleUser) {
+    this.setState({ active: '' });
     var profile = googleUser.getBasicProfile();
     let user = {
       name: profile.getGivenName(),
@@ -34,26 +43,27 @@ class Login extends React.Component {
   logout() {
     gapi.auth2.getAuthInstance().signOut();
     this.props.logout();
+    this.setState({ active: 'active' })
   }
 
   render() {
     let currentUser = this.props.currentUser, login;
     if (currentUser) {
       login = (
-        <div className='login'>
+        <div className='greeting'>
           <span className='white'>Hey, {currentUser.name}!</span>
           <div className='logout' onClick={this.logout}></div>
         </div>
       )
     } else {
       currentUser = { name: '' };
-      login = (
-        <div className='login'>
-          <div id="g-signin2" data-onsuccess={this.onSignIn}></div>
-        </div>
-      )
     }
-    return(login);
+    return(
+      <div className='login'>
+        {login}
+        <div className={`google-signin ${this.state.active}`} id="g-signin2" data-onsuccess={this.onSignIn}></div>
+      </div>
+    )
   }
 }
 
