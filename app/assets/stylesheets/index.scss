@@ -86,3 +86,26 @@ div.google-signin {
     opacity: 1;
   }
 }
+
+div.require-signin {
+  position: absolute;
+  top: -7px;
+  right: 0;
+  opacity: 0;
+  width: 107px;
+  padding: 8px 15px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.7s;
+
+  &.active {
+    right: 200px;
+    opacity: 1;
+  }
+
+  span {
+    color: red;
+    font-size: 13px;
+    width: 100%;
+  }
+}

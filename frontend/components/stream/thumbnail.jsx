@@ -7,7 +7,11 @@ class Thumbnail extends React.Component {
   }
 
   showStream() {
-    this.props.history.push(`/${this.props.videoId}`);
+    if (this.props.currentUser) {
+      this.props.history.push(`/${this.props.videoId}`);
+    } else {
+      this.props.requireSignin();
+    }
   }
 
   render() {

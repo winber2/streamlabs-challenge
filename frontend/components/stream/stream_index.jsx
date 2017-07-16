@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnail from './thumbnail';
+import ThumbnailContainer from './thumbnail_container';
 import Navigation from '../navigation/navigation';
 
 class StreamIndex extends React.Component {
@@ -7,6 +7,7 @@ class StreamIndex extends React.Component {
     super(props);
     this.state = { streamList: [], search: 'league'};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.requireSignin = this.requireSignin.bind(this);
   }
 
   componentDidMount() {
@@ -29,13 +30,14 @@ class StreamIndex extends React.Component {
       let videos = [];
       response.items.forEach( (video, idx)=> {
         videos.push(
-          <Thumbnail key={idx}
+          <ThumbnailContainer key={idx}
             title={video.snippet.title}
             creator={video.snippet.channelTitle}
             videoId={video.id.videoId}
             thumbnail={video.snippet.thumbnails.high.url}
             history={this.props.history}
-            query={this.state.search} />
+            query={this.state.search}
+            requireSignin={this.requireSignin} />
         );
       });
       this.setState({ streamList: videos });
@@ -48,10 +50,16 @@ class StreamIndex extends React.Component {
     }
   }
 
+  requireSignin() {
+    this.setState({ active: 'active' });
+    setTimeout(() => this.setState({ active: '' }), 2000);
+  }
+
   render() {
+
     return(
       <div className='stream-index'>
-        <Navigation handleSubmit={this.handleSubmit} history={this.props.history} />
+        <Navigation active={this.state.active} handleSubmit={this.handleSubmit} history={this.props.history} />
         <h1 className='search'>Search Results for '{this.state.search}'</h1>
         <ul className='stream-list'>
           {this.state.streamList}

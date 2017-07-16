@@ -27,7 +27,12 @@ class Navigation extends React.Component {
             <li onClick={this.toHome}><span className='white'>stream</span><span className='green'>play</span></li>
             <li onKeyDown={this.search} className='search'><input></input></li>
           </ul>
-          <li><LoginContainer /></li>
+          <li className='login'>
+            <div className={`require-signin ${this.props.active}`}>
+              <span>Please sign in first</span>
+            </div>
+            <LoginContainer />
+          </li>
         </nav>
       </header>
     )
