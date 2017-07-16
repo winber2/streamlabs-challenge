@@ -114,26 +114,49 @@ section.video-recommendations {
   }
 }
 
+h2 {
+  display: flex;
+  align-items: center;
+}
+
+h2:hover {
+  cursor: pointer;
+}
+
+div.stream-options-image {
+  display: inline-block;
+  background-image: asset-url('arrow.png');
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+  transform: rotate(90deg);
+  transition: all 0.3s;
+  
+  &.active {
+    transform: rotate(180deg)
+  }
+}
+
 div.stream-options-wrapper {
   margin: 0 50px;
 
   div.stream-options {
+    display: none;
     width: 100%;
     padding: 20px;
 
-    display: flex;
-  }
-
-  div.message-stats-wrapper {
-    display: flex;
-    flex-direction: column;
-
-    div.message-stats {
-      padding-bottom: 10px;
+    &.active {
+      display: flex;
     }
   }
 
+  tr td:first-child {
+    text-align: end;
+  }
+
   ul.user-search {
+    flex: 5;
     border-radius: 3px;
     background: AliceBlue;
     height: 200px;

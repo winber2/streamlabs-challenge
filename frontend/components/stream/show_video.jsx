@@ -8,8 +8,10 @@ class ShowVideo extends React.Component {
     super(props);
     this.state = {
       input: '',
+      active: '',
       videos: [<div key={20}><img src='http://placekitten.com/g/400/200' /></div>] }
     this.chat = this.chat.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +63,14 @@ class ShowVideo extends React.Component {
     })
   }
 
+  toggleOptions() {
+    if (this.state.active) {
+      this.setState({ active: '' });
+    } else {
+      this.setState({ active: 'active' })
+    }
+  }
+
   render() {
     let settings = {
       dots: true,
@@ -84,18 +94,20 @@ class ShowVideo extends React.Component {
         </main>
         <section className="video-recommendations">
           <div className='stream-options-wrapper'>
-            <h2>Stream Options</h2>
-            <div className='stream-options'>
-              <div className='message-stats-wrapper'>
-                <div className='message-stats'>
-                  <span>Messages / second: </span>
-                  <span>25</span>
-                </div>
-                <div className='message-stats'>
-                  <span>Users participating: </span>
-                  <span>25</span>
-                </div>
-              </div>
+            <h2 onClick={this.toggleOptions}>Stream Options <div className={`stream-options-image ${this.state.active}`} /></h2>
+            <div className={`stream-options ${this.state.active}`}>
+              <table className='message-stats'>
+                <tbody>
+                  <tr>
+                    <td>Messages / second:</td>
+                    <td>25</td>
+                  </tr>
+                  <tr>
+                    <td>Users participating:</td>
+                    <td>25</td>
+                  </tr>
+                </tbody>
+              </table>
               <ul className='user-search'>
                 <input className='user-search' placeholder='Search chat by User!'/>
               </ul>
