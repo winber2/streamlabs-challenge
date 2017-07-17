@@ -40,7 +40,7 @@ class StreamIndex extends React.Component {
             requireSignin={this.requireSignin} />
         );
       });
-      this.setState({ streamList: videos });
+      this.setState({ streamList: videos, search: query });
     })
   }
 
