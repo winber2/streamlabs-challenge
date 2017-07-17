@@ -95,13 +95,13 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
-  config.middleware.use ChatDemo::ChatBackend
+  # config.middleware.use ChatDemo::ChatBackend
   # config.middleware.use ChatActionCable
-  config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
+  # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
 
-  # config.action_cable.url = 'ws://localhost:3000/cable'
+  config.action_cable.url = 'wss://streamplay-app.herokuapp.com/cable'
   # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/cable"
-  # config.action_cable.allowed_request_origins = ['https://streamplay-app.herokuapp.com', 'http://streamplay-app.herokuapp.com']
+  config.action_cable.allowed_request_origins = ['https://streamplay-app.herokuapp.com', 'http://streamplay-app.herokuapp.com']
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
