@@ -80,8 +80,8 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
-  # config.middleware.use ChatActionCable
-  # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
+  config.middleware.use ChatActionCable
+  config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
