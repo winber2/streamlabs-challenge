@@ -1,3 +1,5 @@
+require 'action_cable_chat'
+
 class ChatActionCable < ActionCable::Connection::WebSocket
   def initialize(app, options={})
     @app = app
@@ -93,9 +95,9 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
+  config.middleware.use ChatDemo::ChatBackend
   # config.middleware.use ChatActionCable
-  config.middleware.use ChatActionCable
-  config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
+  # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
 
   # config.action_cable.url = 'ws://localhost:3000/cable'
   # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/cable"

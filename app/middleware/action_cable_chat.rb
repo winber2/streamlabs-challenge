@@ -1,13 +1,15 @@
-class ChatActionCable
-  def initialize(app, options={})
-    @app = app
-  end
+require 'faye/websocket'
 
-  def call(env)
-    if Faye::WebSocket.websocket?(env)
-      ActionCable.server.call(env)
-    else
-      @app.call(env)
+module ChatDemo
+  class ChatBackend
+    KEEPALIVE_TIME = 15 # in seconds
+
+    def initialize(app)
+      @app     = app
+      @clients = []
+    end
+
+    def call(env)
     end
   end
-end  
+end
