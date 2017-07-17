@@ -1,24 +1,24 @@
-# development:
-#   adapter: async
-#
-# test:
-#   adapter: async
-#
-# production:
-#   adapter: redis
-#   url: redis://redistogo:d394489a1fa54907714948ab886ceffc@koi.redistogo.com:11957/
+development:
+  adapter: async
 
-development: &development
-  :url: redis://localhost:6379
-  :host: localhost
-  :port: 6379
-  :timeout: 1
-  :inline: true
-test: *development
-production: &production
-  :url: redis://redistogo:d394489a1fa54907714948ab886ceffc@koi.redistogo.com:11957
-  :host: koi.redistogo.com
-  :port: 11957
-  :password: d394489a1fa54907714948ab886ceffc
-  :inline: true
-  :timeout: 1
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: redis://redistogo:d394489a1fa54907714948ab886ceffc@koi.redistogo.com:11957/
+
+# development: &development
+#   :url: redis://localhost:6379
+#   :host: localhost
+#   :port: 6379
+#   :timeout: 1
+#   :inline: true
+# test: *development
+# production: &production
+#   :url: redis://redistogo:d394489a1fa54907714948ab886ceffc@koi.redistogo.com:11957
+#   :host: koi.redistogo.com
+#   :port: 11957
+#   :password: d394489a1fa54907714948ab886ceffc
+#   :inline: true
+#   :timeout: 1
