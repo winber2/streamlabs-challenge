@@ -95,7 +95,7 @@ Rails.application.configure do
   end
   # config.middleware.use ChatActionCable
   config.middleware.use ChatActionCable
-  config.web_socket_server_url = "wss://your-heroku-app.herokuapp.com/"
+  config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/"
 
   # config.action_cable.url = 'ws://localhost:3000/cable'
   # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/cable"
