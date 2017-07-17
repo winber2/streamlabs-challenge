@@ -1,10 +1,10 @@
-class ChatActionCable
+class ChatActionCable < ActionCable::Connection::WebSocket
   def initialize(app, options={})
     @app = app
-  end
+ end
 
   def call(env)
-    if Faye::WebSocket.websocket?(env)
+    if ::WebSocket::Driver.websocket?(env)
       ActionCable.server.call(env)
     else
       @app.call(env)
@@ -50,7 +50,6 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.action_cable.url = 'ws://localhost:3000/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -95,8 +94,12 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
   # config.middleware.use ChatActionCable
-  config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = ['https://streamplay-app.herokuapp.com', 'http://streamplay-app.herokuapp.com']
+  config.middleware.use ChatActionCable
+  config.web_socket_server_url = "wss://your-heroku-app.herokuapp.com/"
+
+  # config.action_cable.url = 'ws://localhost:3000/cable'
+  # config.web_socket_server_url = "wss://streamplay-app.herokuapp.com/cable"
+  # config.action_cable.allowed_request_origins = ['https://streamplay-app.herokuapp.com', 'http://streamplay-app.herokuapp.com']
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
